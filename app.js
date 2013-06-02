@@ -1,7 +1,12 @@
-var exec = require('child_process').exec,
+var fs = require('fs'),
+	exec = require('child_process').exec,
+
+	config = JSON.parse(fs.readFileSync('config.json', encoding='ascii')),
 	// cmd = 'echo Test',
-	cmd = './lib/Adafruit_DHT_Driver/Adafruit_DHT 11 4',
+	cmd = config.script+' '+config.device+' '+config.pin,
 	interval = setInterval(getTemp, 3000);
+
+console.log(cmd);
 
 function getTemp() {
 	var child = exec(cmd, function(error, stdout, stderr) {

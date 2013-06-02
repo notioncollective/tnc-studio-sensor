@@ -1,0 +1,5 @@
+{
+	"script": "./lib/Adafruit_DHT_Driver/Adafruit_DHT",
+	"device": "11",
+	"pin": "4"
+}
