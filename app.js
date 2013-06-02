@@ -32,8 +32,8 @@ function getTemp() {
 				
 				// data goes in an object
 				data = {
-					temp: temp,
-					hum: hum
+					temp_celsius: temp,
+					percent_hum: hum
 				}
 				
 				console.log(data);
