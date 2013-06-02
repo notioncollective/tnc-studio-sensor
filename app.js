@@ -9,12 +9,33 @@ var fs = require('fs'),
 console.log(cmd);
 
 function getTemp() {
-	var child = exec(cmd, function(error, stdout, stderr) {
-		console.log('stdout: '+stdout);
-		console.log('stderr: '+stderr);
-
-		if(error !== null) {
-			console.log('exec error: '+error);
+	var child = exec(cmd, function(err, stdout, stderr) {
+		var lines,
+				matches,
+				temp,
+				hum,
+				data;
+		
+		if(!err) {
+			lines = stdout.split('\n');
+			if(lines[2]) {
+				matches = /Temp = (\d+) \*C\, Hum = (\d+) \%/.exec(lines[2]);
+				if(matches) {
+					temp = matches[1];
+					hum = matches[2]
+				}
+			}
+			
+			// data goes in an object
+			data = {
+				temp: temp,
+				hum: hum
+			}
+			
+			console.log(data);
+			
+		} else {
+			console.log("There was an error!\n"+stderr);
 		}
 	});
 
